@@ -138,6 +138,13 @@ async def test_controller_buttons(controller_state: ControllerState):
     await button_push(controller_state, 'home')
 
 
+async def run_my_script(controller_state: ControllerState):
+    await button_push(controller_state, 'a')
+    await asyncio.sleep(0.1)
+
+
+
+
 def ensure_valid_button(controller_state, *buttons):
     """
     Raise ValueError if any of the given buttons os not part of the controller state.
@@ -179,6 +186,12 @@ def _register_commands_with_controller_state(controller_state, cli):
         await test_controller_buttons(controller_state)
 
     cli.add_command(test_buttons.__name__, test_buttons)
+
+    async def my_script():
+        await run_my_script(controller_state)
+
+    cli.add_command(my_script.__name__, my_script)
+
 
     # Mash a button command
     async def mash(*args):
