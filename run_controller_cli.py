@@ -139,8 +139,9 @@ async def test_controller_buttons(controller_state: ControllerState):
 
 
 async def run_my_script(controller_state: ControllerState):
-    await button_push(controller_state, 'a')
-    await asyncio.sleep(0.1)
+    while True:
+        await button_push(controller_state, 'a')
+        await asyncio.sleep(0.1)
 
 
 
